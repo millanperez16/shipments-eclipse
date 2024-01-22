@@ -9,7 +9,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import cat.institutmarianao.shipmentsws.model.Action;
 import cat.institutmarianao.shipmentsws.model.Reception;
 import cat.institutmarianao.shipmentsws.model.Shipment;
 import cat.institutmarianao.shipmentsws.model.Shipment.Category;
@@ -102,10 +101,10 @@ public class ShipmentServiceImpl implements ShipmentService {
 		if (shipment.getTracking().size() != 1) {
 			return null; // TODO lanzar excepción
 		}
-		for (Action action : shipment.getTracking()) {
-			if (!(action instanceof Reception)) {
-				return null; // TODO lanzar excepción
-			}
+		if (shipment.getTracking().get(0) instanceof Reception) {
+			shipment.getTracking().get(0).setShipment(shipment);
+		} else {
+			return null; // TODO lanzar excepción
 		}
 		return shipmentRepository.saveAndFlush(shipment);
 	}
