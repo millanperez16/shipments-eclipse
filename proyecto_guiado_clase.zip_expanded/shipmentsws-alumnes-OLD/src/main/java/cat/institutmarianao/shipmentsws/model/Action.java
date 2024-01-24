@@ -25,6 +25,7 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -82,4 +83,7 @@ public abstract class Action implements Serializable {
 	@NotNull
 	@JsonIgnore
 	protected Shipment shipment;
+
+	@Transient
+	protected long idShipment;
 }

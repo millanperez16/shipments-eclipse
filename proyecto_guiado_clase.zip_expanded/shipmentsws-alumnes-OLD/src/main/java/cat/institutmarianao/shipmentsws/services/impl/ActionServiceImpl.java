@@ -1,5 +1,6 @@
 package cat.institutmarianao.shipmentsws.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,7 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cat.institutmarianao.shipmentsws.model.Action;
+import cat.institutmarianao.shipmentsws.model.Shipment;
+import cat.institutmarianao.shipmentsws.model.User;
 import cat.institutmarianao.shipmentsws.repositories.ActionRepository;
+import cat.institutmarianao.shipmentsws.repositories.ShipmentRepository;
+import cat.institutmarianao.shipmentsws.repositories.UserRepository;
 import cat.institutmarianao.shipmentsws.services.ActionService;
 
 @Service
@@ -15,7 +20,13 @@ public class ActionServiceImpl implements ActionService {
 
 	@Autowired
 	private ActionRepository actionRepository;
-	
+
+	@Autowired
+	private ShipmentRepository shipmentRepository;
+
+	@Autowired
+	private UserRepository userRepository;
+
 	@Override
 	public List<Action> findAll() {
 		return actionRepository.findAll();
@@ -37,6 +48,40 @@ public class ActionServiceImpl implements ActionService {
 
 	@Override
 	public Action save(Action action) {
+		Long shId = action.getIdShipment();
+		Shipment shipment = shipmentRepository.findById(shId).get();
+
+		if (shipment == null) {
+			return null;
+		} else {
+			action.setShipment(shipment);
+		}
+
+		String shUser = action.getPerformer().getUsername();
+		User user = userRepository.findById(shUser).get();
+		if (user == null) {
+			return null;
+		} else {
+			action.setPerformer(user);
+		}
+
+		ArrayList<Action> ShTracking = (ArrayList<Action>) shipment.getTracking();
+		if (ShTracking.isEmpty() || ShTracking == null || ShTracking.size() >= 3
+				|| action.getType().equals("RECEPTION")) {
+			return null;
+		}
+		if (action.getType().equals("ASSIGNMENT")) {
+			if (ShTracking.size() != 1 || !ShTracking.get(0).getType().equals("RECEPTION")) {
+				return null;
+			}
+			ShTracking.add(0, action);
+		}
+		if (action.getType().equals("DELIVERY")) {
+			if (ShTracking.size() != 2 || !ShTracking.get(0).getType().equals("ASSIGNMENT")) {
+				return null;
+			}
+			ShTracking.add(0, action);
+		}
 		return actionRepository.saveAndFlush(action);
 	}
 }
