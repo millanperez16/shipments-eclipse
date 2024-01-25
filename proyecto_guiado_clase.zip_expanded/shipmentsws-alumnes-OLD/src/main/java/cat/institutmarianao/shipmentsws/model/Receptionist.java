@@ -2,8 +2,6 @@ package cat.institutmarianao.shipmentsws.model;
 
 import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -31,7 +29,7 @@ public class Receptionist extends User implements Serializable {
 	private Office office;
 
 	@Column(length = MAX_PLACE, nullable = true)
-	@Size(max=MAX_PLACE)
+	@Size(max = MAX_PLACE)
 	private String place;
 
 }

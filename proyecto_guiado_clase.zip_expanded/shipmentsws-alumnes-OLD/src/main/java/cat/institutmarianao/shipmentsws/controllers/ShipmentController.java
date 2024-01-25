@@ -51,7 +51,6 @@ public class ShipmentController {
 	@Autowired
 	private ActionService actionService;
 
-
 	/* Swagger */
 	@Operation(summary = "Find all shipments")
 	@ApiResponse(responseCode = "200", content = {
@@ -132,13 +131,13 @@ public class ShipmentController {
 	/**/
 	@PostMapping("/save/shipment")
 	@Validated(OnShipmentCreate.class)
-	//public Shipment reception(@Parameter(schema = @Schema(implementation = Shipment.class)) @RequestBody @Valid Shipment shipment) {
+	// public Shipment reception(@Parameter(schema = @Schema(implementation =
+	// Shipment.class)) @RequestBody @Valid Shipment shipment) {
 	public Shipment reception(@RequestBody @Valid Shipment shipment) {
 		// save a shipment (with its reception action)
 		return shipmentService.save(shipment);
 	}
-	
-	
+
 	/* Swagger */
 	@Operation(summary = "Save an action of a shipment (in its tracking). Action at the end of shipment tracking")
 	/**/
@@ -158,7 +157,6 @@ public class ShipmentController {
 	/**/
 	@DeleteMapping("/delete/by/id/{shipment_id}")
 	public void deleteById(@PathVariable("shipment_id") @Positive Long shipmentId) {
-
-		// TODO delete a shipment by its id
+		shipmentService.deleteById(shipmentId);
 	}
 }

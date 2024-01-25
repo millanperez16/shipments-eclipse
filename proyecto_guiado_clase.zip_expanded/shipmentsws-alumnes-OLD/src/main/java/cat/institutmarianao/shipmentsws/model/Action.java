@@ -80,7 +80,6 @@ public abstract class Action implements Serializable {
 	protected Date date;
 
 	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@NotNull
 	@JsonIgnore
 	protected Shipment shipment;
 

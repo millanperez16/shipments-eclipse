@@ -1,11 +1,11 @@
 package cat.institutmarianao.shipmentsws.services.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import cat.institutmarianao.shipmentsws.model.Action;
 import cat.institutmarianao.shipmentsws.model.Shipment;
@@ -14,6 +14,7 @@ import cat.institutmarianao.shipmentsws.repositories.ActionRepository;
 import cat.institutmarianao.shipmentsws.repositories.ShipmentRepository;
 import cat.institutmarianao.shipmentsws.repositories.UserRepository;
 import cat.institutmarianao.shipmentsws.services.ActionService;
+import cat.institutmarianao.shipmentsws.validation.groups.OnActionCreate;
 
 @Service
 public class ActionServiceImpl implements ActionService {
@@ -47,6 +48,7 @@ public class ActionServiceImpl implements ActionService {
 	}
 
 	@Override
+	@Validated(OnActionCreate.class)
 	public Action save(Action action) {
 		Long shId = action.getIdShipment();
 		Shipment shipment = shipmentRepository.findById(shId).get();
@@ -65,7 +67,7 @@ public class ActionServiceImpl implements ActionService {
 			action.setPerformer(user);
 		}
 
-		ArrayList<Action> ShTracking = (ArrayList<Action>) shipment.getTracking();
+		List<Action> ShTracking = shipment.getTracking();
 		if (ShTracking.isEmpty() || ShTracking == null || ShTracking.size() >= 3
 				|| action.getType().equals("RECEPTION")) {
 			return null;

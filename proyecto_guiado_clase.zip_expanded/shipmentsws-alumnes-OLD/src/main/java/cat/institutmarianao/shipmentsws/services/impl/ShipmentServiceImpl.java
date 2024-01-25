@@ -22,6 +22,7 @@ import cat.institutmarianao.shipmentsws.specifications.ShipmentWithStatus;
 import cat.institutmarianao.shipmentsws.validation.groups.OnShipmentCreate;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 @Validated
 @Service
@@ -107,6 +108,11 @@ public class ShipmentServiceImpl implements ShipmentService {
 			return null; // TODO lanzar excepción
 		}
 		return shipmentRepository.saveAndFlush(shipment);
+	}
+
+	@Override
+	public void deleteById(@NotNull Long shipmentId) {
+		shipmentRepository.deleteById(shipmentId);
 	}
 
 }

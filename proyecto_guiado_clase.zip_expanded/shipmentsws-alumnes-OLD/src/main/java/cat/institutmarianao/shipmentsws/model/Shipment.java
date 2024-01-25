@@ -11,6 +11,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -31,7 +32,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Table(name="shipments")
+@Table(name = "shipments")
 public class Shipment implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -73,10 +74,10 @@ public class Shipment implements Serializable {
 	private Boolean express;
 	private Boolean fragile;
 
-	@Size(max=MAX_DESCRIPTION)
+	@Size(max = MAX_DESCRIPTION)
 	private String note;
 
-	@OneToMany(mappedBy="shipment",cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "shipment", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Action> tracking;
 
 	/* JPA */
