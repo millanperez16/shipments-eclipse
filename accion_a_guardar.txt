@@ -8,5 +8,5 @@
   },
   "date": "25/01/2024 18:50:23",
   "idShipment": 2,
-  "type": "RECEPTION"
+  "type": "DELIVERY"
 }
