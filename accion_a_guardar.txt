@@ -1,0 +1,12 @@
+{
+  "id": null,
+  "performer": {
+    "username": "genis",
+    "role": "COURIER",
+    "fullName": "Genís Esteve i Prats",
+    "extension": 1515
+  },
+  "date": "25/01/2024 18:50:23",
+  "idShipment": 2,
+  "type": "DELIVERY"
+}
