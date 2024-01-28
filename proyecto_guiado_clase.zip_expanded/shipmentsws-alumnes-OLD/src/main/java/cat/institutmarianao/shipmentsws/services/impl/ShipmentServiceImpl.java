@@ -9,6 +9,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import cat.institutmarianao.shipmentsws.exception.NotFoundException;
 import cat.institutmarianao.shipmentsws.model.Reception;
 import cat.institutmarianao.shipmentsws.model.Shipment;
 import cat.institutmarianao.shipmentsws.model.Shipment.Category;
@@ -89,11 +90,7 @@ public class ShipmentServiceImpl implements ShipmentService {
 
 	@Override
 	public Shipment findById(Long id) {
-		Optional<Shipment> shipment = shipmentRepository.findById(id);
-		if (shipment.isEmpty()) {
-			return null;
-		}
-		return shipment.get();
+		return shipmentRepository.findById(id).orElseThrow(NotFoundException::new);
 	}
 
 	@Override

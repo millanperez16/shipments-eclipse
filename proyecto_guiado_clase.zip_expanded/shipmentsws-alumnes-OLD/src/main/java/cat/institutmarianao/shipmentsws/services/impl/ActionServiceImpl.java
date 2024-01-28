@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import cat.institutmarianao.shipmentsws.exception.NotFoundException;
 import cat.institutmarianao.shipmentsws.model.Action;
 import cat.institutmarianao.shipmentsws.model.Shipment;
 import cat.institutmarianao.shipmentsws.model.User;
@@ -40,11 +41,7 @@ public class ActionServiceImpl implements ActionService {
 
 	@Override
 	public Action findById(Long id) {
-		Optional<Action> action = actionRepository.findById(id);
-		if (action.isEmpty()) {
-			return null;
-		}
-		return action.get();
+		return actionRepository.findById(id).orElseThrow(NotFoundException::new);
 	}
 
 	@Override
