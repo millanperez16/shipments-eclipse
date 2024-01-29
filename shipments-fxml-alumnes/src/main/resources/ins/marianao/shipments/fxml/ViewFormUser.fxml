@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+
+<BorderPane fx:id="viewProfileForm" prefHeight="540.0" prefWidth="900.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ins.marianao.shipments.fxml.ControllerFormUser">
+   <center>
+		<AnchorPane styleClass="centerregion">
+			<children>
+            <GridPane hgap="10.0" vgap="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+                <ColumnConstraints hgrow="NEVER" maxWidth="500.0" />
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints fillHeight="false" vgrow="ALWAYS" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label styleClass="title" text="%fxml.text.formUser.title" GridPane.columnIndex="1" />
+                  <HBox spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <ComboBox fx:id="cmbRole" disable="true" minWidth="200.0" HBox.hgrow="ALWAYS" />
+                        <HBox alignment="CENTER_RIGHT" styleClass="input-group" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label text="%fxml.text.formUser.extension.lbl">
+                                 <styleClass>
+                                    <String fx:value="label-left" />
+                                 </styleClass>
+                              </Label>
+                              <TextField fx:id="txtExtension" promptText="%fxml.text.formUser.extension" styleClass="x-large" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <HBox styleClass="input-group" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <children>
+                        <Label text="%fxml.text.formUser.username.lbl">
+                           <styleClass>
+                              <String fx:value="label-left" />
+                           </styleClass>
+                        </Label>
+                        <TextField fx:id="txtUsername" disable="true" editable="false" promptText="%fxml.text.formUser.username" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox styleClass="input-group" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <children>
+                        <Label text="%fxml.text.formUser.password.lbl">
+                           <styleClass>
+                              <String fx:value="label-left" />
+                           </styleClass>
+                        </Label>
+                        <PasswordField fx:id="txtPassword" promptText="%fxml.text.formUser.password" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox styleClass="input-group" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <children>
+                        <Label text="%fxml.text.formUser.password.confirm.lbl">
+                           <styleClass>
+                              <String fx:value="label-left" />
+                           </styleClass>
+                        </Label>
+                        <PasswordField fx:id="txtConfirm" promptText="%fxml.text.formUser.password.confirm" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox styleClass="input-group" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <children>
+                        <Label text="%fxml.text.formUser.fullname.lbl">
+                           <styleClass>
+                              <String fx:value="label-left" />
+                           </styleClass>
+                        </Label>
+                        <TextField fx:id="txtFullname" promptText="%fxml.text.formUser.fullname" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <StackPane GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="6">
+                     <children>
+                        <HBox fx:id="boxReceptionists" spacing="20.0" styleClass="panel-solid">
+                           <children>
+                              <HBox styleClass="input-group" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label text="%fxml.text.formUser.office.lbl">
+                                       <styleClass>
+                                          <String fx:value="label-left" />
+                                       </styleClass>
+                                    </Label>
+                                    <ComboBox fx:id="cmbOffice" minWidth="180.0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="TOP_RIGHT" styleClass="input-group" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label text="%fxml.text.formUser.place.lbl">
+                                       <styleClass>
+                                          <String fx:value="label-left" />
+                                       </styleClass>
+                                    </Label>
+                                    <TextField fx:id="txtPlace" promptText="lloc" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                        <HBox fx:id="boxCouriers">
+                           <children>
+                              <Label text="%fxml.text.formUser.company.lbl">
+                                 <styleClass>
+                                    <String fx:value="label-left" />
+                                 </styleClass>
+                              </Label>
+                              <ComboBox fx:id="cmbCompany" styleClass="combo-fullwidth" HBox.hgrow="ALWAYS" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="input-group" />
+                              <String fx:value="panel-solid" />
+                           </styleClass>
+                        </HBox>
+                     </children>
+                  </StackPane>
+      						<Button fx:id="btnSave" mnemonicParsing="false" onAction="#saveProfileClick" styleClass="button-fullwidth" text="%fxml.text.formUser.submit" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+               </children>
+            </GridPane>
+				<HBox spacing="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+					<padding>
+						<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+					</padding>
+				</HBox>
+			</children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+		</AnchorPane>
+   </center>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</BorderPane>
