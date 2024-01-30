@@ -11,10 +11,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-<<<<<<< HEAD:shipmentsws-alumnes/src/main/java/cat/institutmarianao/shipmentsws/model/Shipment.java
-=======
 import jakarta.persistence.FetchType;
->>>>>>> 961af2798696a867e356e9ca500b784ebb621397:proyecto_guiado_clase.zip_expanded/shipmentsws-alumnes-OLD/src/main/java/cat/institutmarianao/shipmentsws/model/Shipment.java
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -35,11 +32,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-<<<<<<< HEAD:shipmentsws-alumnes/src/main/java/cat/institutmarianao/shipmentsws/model/Shipment.java
-@Table(name="shipments")
-=======
 @Table(name = "shipments")
->>>>>>> 961af2798696a867e356e9ca500b784ebb621397:proyecto_guiado_clase.zip_expanded/shipmentsws-alumnes-OLD/src/main/java/cat/institutmarianao/shipmentsws/model/Shipment.java
 public class Shipment implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -81,17 +74,10 @@ public class Shipment implements Serializable {
 	private Boolean express;
 	private Boolean fragile;
 
-<<<<<<< HEAD:shipmentsws-alumnes/src/main/java/cat/institutmarianao/shipmentsws/model/Shipment.java
-	@Size(max=MAX_DESCRIPTION)
-	private String note;
-
-	@OneToMany(mappedBy="shipment",cascade=CascadeType.ALL)
-=======
 	@Size(max = MAX_DESCRIPTION)
 	private String note;
 
 	@OneToMany(mappedBy = "shipment", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
->>>>>>> 961af2798696a867e356e9ca500b784ebb621397:proyecto_guiado_clase.zip_expanded/shipmentsws-alumnes-OLD/src/main/java/cat/institutmarianao/shipmentsws/model/Shipment.java
 	private List<Action> tracking;
 
 	/* JPA */

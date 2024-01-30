@@ -7,15 +7,19 @@ import cat.institutmarianao.shipmentsws.model.Shipment;
 import cat.institutmarianao.shipmentsws.model.Shipment.Category;
 import cat.institutmarianao.shipmentsws.model.Shipment.Status;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 public interface ShipmentService {
-	List<Shipment> findAll(Status status, String receivedBy, String courierAssigned, Category category, Date from, Date to);
-	
+	List<Shipment> findAll(Status status, String receivedBy, String courierAssigned, Category category, Date from,
+			Date to);
+
 	Shipment findById(Long id);
 
 	List<Shipment> findAllPending(String receivedBy, String courierAssigned, Category category, Date from, Date to);
-	
+
 	List<Shipment> findAllInProcess(String receivedBy, String courierAssigned, Category category, Date from, Date to);
-	
+
 	Shipment save(@Valid Shipment shipment);
+
+	void deleteById(@NotNull Long shipmentId);
 }

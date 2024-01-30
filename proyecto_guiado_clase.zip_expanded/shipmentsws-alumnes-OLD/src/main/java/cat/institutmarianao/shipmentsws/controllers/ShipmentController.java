@@ -47,12 +47,6 @@ public class ShipmentController {
 //
 	@Autowired
 	private ShipmentService shipmentService;
-<<<<<<< HEAD:shipmentsws-alumnes/src/main/java/cat/institutmarianao/shipmentsws/controllers/ShipmentController.java
-
-	@Autowired
-	private ActionService actionService;
-=======
->>>>>>> 961af2798696a867e356e9ca500b784ebb621397:proyecto_guiado_clase.zip_expanded/shipmentsws-alumnes-OLD/src/main/java/cat/institutmarianao/shipmentsws/controllers/ShipmentController.java
 
 	@Autowired
 	private ActionService actionService;

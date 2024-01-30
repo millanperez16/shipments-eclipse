@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cat.institutmarianao.shipmentsws.exception.NotFoundException;
 import cat.institutmarianao.shipmentsws.model.Company;
 import cat.institutmarianao.shipmentsws.repositories.CompanyRepository;
 import cat.institutmarianao.shipmentsws.services.CompanyService;
@@ -23,11 +24,7 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	public Company findById(Long id) {
-		Optional<Company> company = companyRepository.findById(id);
-		if (company.isEmpty()) {
-			return null;
-		}
-		return company.get();
+		return companyRepository.findById(id).orElseThrow(NotFoundException::new);
 	}
 
 }
