@@ -2,10 +2,11 @@ package cat.institutmarianao.shipmentsws.model;
 
 import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import cat.institutmarianao.shipmentsws.PasswordSerializer;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.DiscriminatorType;
@@ -72,7 +73,7 @@ public abstract class User implements Serializable {
 
 	@Column(nullable = false)
 	@Size(min = MIN_PASSWORD)
-	@JsonIgnore
+	@JsonSerialize(using = PasswordSerializer.class)
 	protected String password;
 
 	@Column(name = "full_name", length = MAX_FULL_NAME, nullable = false)
