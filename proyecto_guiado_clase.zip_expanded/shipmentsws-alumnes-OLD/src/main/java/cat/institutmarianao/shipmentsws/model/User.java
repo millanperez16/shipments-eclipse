@@ -2,6 +2,7 @@ package cat.institutmarianao.shipmentsws.model;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -74,6 +75,7 @@ public abstract class User implements Serializable {
 	@Column(nullable = false)
 	@Size(min = MIN_PASSWORD)
 	@JsonSerialize(using = PasswordSerializer.class)
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	protected String password;
 
 	@Column(name = "full_name", length = MAX_FULL_NAME, nullable = false)
