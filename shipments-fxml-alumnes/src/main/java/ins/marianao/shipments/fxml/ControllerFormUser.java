@@ -17,10 +17,13 @@ import cat.institutmarianao.shipmentsws.model.Receptionist;
 import cat.institutmarianao.shipmentsws.model.User;
 import cat.institutmarianao.shipmentsws.model.User.Role;
 import ins.marianao.shipments.fxml.manager.ResourceManager;
+import ins.marianao.shipments.fxml.services.ServiceQueryCompanies;
+import ins.marianao.shipments.fxml.services.ServiceQueryOffices;
 import ins.marianao.shipments.fxml.services.ServiceSaveUser;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -274,12 +277,69 @@ public class ControllerFormUser implements Initializable, ChangeListener<Pair<St
 	}
 	
 	protected void loadOffices(ComboBox<Office> combo) {
-		// TODO query offices and set combo items
+		// query offices and set combo items
+		
+		final ServiceQueryOffices queryOffices = new ServiceQueryOffices();
+		
+		queryOffices.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+
+            @Override
+            public void handle(WorkerStateEvent t) {
+            	cmbOffice.getItems().clear();
+            	
+            	ObservableList<Office> users = FXCollections.observableArrayList(queryOffices.getValue());
+
+            	cmbOffice.setItems( users );
+            }
+        });
+		
+		queryOffices.setOnFailed(new EventHandler<WorkerStateEvent>() {
+			@Override
+			public void handle(WorkerStateEvent t) {
+
+				Throwable e = t.getSource().getException();
+				
+				ControllerMenu.showError(ResourceManager.getInstance().getText("error.viewShipments.web.service"), e.getMessage(), ExceptionUtils.getStackTrace(e));
+			}
+			
+		});
+		
+		queryOffices.start();
+		
 		return;
 	}
 	
 	protected void loadCompanies(ComboBox<Company> combo) {
-		// TODO query companies and set combo items
+		// query companies and set combo items
+		
+		final ServiceQueryCompanies queryCompanies = new ServiceQueryCompanies();
+		
+		queryCompanies.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+
+            @Override
+            public void handle(WorkerStateEvent t) {
+            	
+            	cmbCompany.getItems().clear();
+            	
+            	ObservableList<Company> users = FXCollections.observableArrayList(queryCompanies.getValue());
+
+            	cmbCompany.setItems( users );
+            }
+        });
+		
+		queryCompanies.setOnFailed(new EventHandler<WorkerStateEvent>() {
+			@Override
+			public void handle(WorkerStateEvent t) {
+
+				Throwable e = t.getSource().getException();
+				
+				ControllerMenu.showError(ResourceManager.getInstance().getText("error.viewShipments.web.service"), e.getMessage(), ExceptionUtils.getStackTrace(e));
+			}
+			
+		});
+		
+		queryCompanies.start();
+		
 		return;
 	}
 }
