@@ -33,6 +33,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
@@ -44,8 +45,8 @@ public class ControllerShipmentsList implements Initializable {
 	
 	@FXML private ComboBox<Pair<String,String>> cmbStatus;
 	@FXML private ComboBox<Pair<String,String>> cmbCategory;
-	@FXML private ComboBox<Pair<String,String>> cmbRecepcionist;
-	@FXML private ComboBox<Pair<String,String>> cmbCourier;
+	@FXML private TextField txtRecepcionist;
+	@FXML private TextField txtCourier;
 	@FXML private DatePicker from;
 	@FXML private DatePicker to;
 	
@@ -111,49 +112,11 @@ public class ControllerShipmentsList implements Initializable {
 			}
 		});
 		
-		// Receptionist
-		List<Pair<String,String>> recepcionist = Stream.of(Shipment.Status.values()).map(new Function<Status,Pair<String,String>>() {
-			@Override
-			public Pair<String,String> apply(Status t) {
-				String key = t.name();
-				return new Pair<String, String>(key, resource.getString("text.Status."+key));
-			}
-			
-		}).collect(Collectors.toList());
+		this.txtRecepcionist.setDisable(false);
+		this.txtRecepcionist.setEditable(true);
 		
-		ObservableList<Pair<String,String>> listRecepcionist = FXCollections.observableArrayList(recepcionist);
-		listRecepcionist.add(0, null);
-		
-		this.cmbRecepcionist.setItems(listRecepcionist);		
-		this.cmbRecepcionist.valueProperty().addListener(new ChangeListener<Pair<String,String>>() {
-			@Override
-			public void changed(ObservableValue<? extends Pair<String,String>> observable, Pair<String,String> oldValue, Pair<String,String> newValue) {
-
-			}
-		});
-		
-		// Courier
-		List<Pair<String,String>> courier = Stream.of(Shipment.Status.values()).map(new Function<Status,Pair<String,String>>() {
-			@Override
-			public Pair<String,String> apply(Status t) {
-				String key = t.name();
-				return new Pair<String, String>(key, resource.getString("text.Status."+key));
-			}
-			
-		}).collect(Collectors.toList());
-		
-		ObservableList<Pair<String,String>> listCouriers = FXCollections.observableArrayList(courier);
-		listCouriers.add(0, null);
-		
-		this.cmbCourier.setItems(listCouriers);
-		this.cmbCourier.setConverter(Formatters.getStringPairConverter("Status"));
-		
-		this.cmbCourier.valueProperty().addListener(new ChangeListener<Pair<String,String>>() {
-			@Override
-			public void changed(ObservableValue<? extends Pair<String,String>> observable, Pair<String,String> oldValue, Pair<String,String> newValue) {
-
-			}
-		});
+		this.txtCourier.setDisable(false);
+		this.txtCourier.setEditable(true);
 		
 		this.from.valueProperty().addListener(new ChangeListener<LocalDate>() {
             @Override

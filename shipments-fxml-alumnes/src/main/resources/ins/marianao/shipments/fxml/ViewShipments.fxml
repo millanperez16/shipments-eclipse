@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -20,8 +21,8 @@
 			<children>
             <GridPane hgap="10.0" prefHeight="40.0" prefWidth="861.0" vgap="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="80.0">
               <columnConstraints>
-                <ColumnConstraints halignment="LEFT" hgrow="NEVER" />
-                  <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" />
+                <ColumnConstraints halignment="LEFT" hgrow="NEVER" maxWidth="528.0" minWidth="426.0" prefWidth="426.0" />
+                  <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" maxWidth="425.0" minWidth="323.0" prefWidth="425.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
@@ -40,7 +41,7 @@
                               <String fx:value="label-large" />
                            </styleClass>
                         </Label>
-                        <ComboBox fx:id="cmbRecepcionist" maxWidth="467.0" prefWidth="467.0" />
+                        <TextField fx:id="txtRecepcionist" prefWidth="279.0" />
                      </children>
                   </HBox>
                </children>
@@ -66,8 +67,8 @@
 				</TableView>
             <GridPane hgap="10.0" layoutX="20.0" layoutY="132.0" prefHeight="40.0" prefWidth="861.0" vgap="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
                <columnConstraints>
-                  <ColumnConstraints halignment="LEFT" hgrow="NEVER" />
-                  <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" />
+                  <ColumnConstraints halignment="LEFT" hgrow="NEVER" maxWidth="524.0" minWidth="413.0" prefWidth="426.0" />
+                  <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" maxWidth="437.0" minWidth="326.0" prefWidth="424.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
@@ -82,15 +83,15 @@
                   <HBox styleClass="input-group" GridPane.columnIndex="1">
                      <children>
                         <Label styleClass="label-large" text="%fxml.text.viewShipments.courier" />
-                        <ComboBox fx:id="cmbCourier" maxWidth="463.0" prefWidth="463.0" />
+                        <TextField fx:id="txtCourier" prefWidth="283.0" />
                      </children>
                   </HBox>
                </children>
             </GridPane>
             <GridPane hgap="10.0" layoutX="20.0" layoutY="181.0" prefHeight="40.0" prefWidth="861.0" vgap="20.0">
                <columnConstraints>
-                  <ColumnConstraints halignment="LEFT" hgrow="NEVER" />
-                  <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" />
+                  <ColumnConstraints halignment="LEFT" hgrow="NEVER" maxWidth="435.0" minWidth="395.0" prefWidth="425.0" />
+                  <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" maxWidth="456.0" minWidth="416.0" prefWidth="426.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
@@ -99,7 +100,7 @@
                   <HBox styleClass="input-group">
                      <children>
                         <Label prefHeight="20.0" prefWidth="61.0" text="%fxml.text.viewShipments.from" />
-                        <DatePicker fx:id="from" prefHeight="40.0" prefWidth="299.0" />
+                        <DatePicker fx:id="from" prefHeight="40.0" prefWidth="339.0" />
                      </children>
                   </HBox>
                   <HBox styleClass="input-group" GridPane.columnIndex="1">

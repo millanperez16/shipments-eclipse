@@ -70,61 +70,13 @@ public class ControllerFormShipment implements Initializable, ChangeListener<Pai
 		
 		this.cmbCategory.setItems(FXCollections.observableArrayList(categories));
 		this.cmbCategory.setConverter(Formatters.getStringPairConverter("Category"));
-	}
-
-	public void enableEdition() {
-		this.edicio = true;
-
-		String key = User.Role.COURIER.name();
-		this.cmbCategory.setValue(new Pair<String, String>(key, ResourceManager.getInstance().getText("text.User."+key)));
-		
-		this.txtUsername.clear();
-		this.txtFullname.clear();
-		this.txtExtension.clear();
-		this.txtPlace.clear();
-
-		this.enableCourierFields();
-
 		this.txtUsername.setDisable(false);
 		this.txtUsername.setEditable(true);
-		this.cmbCategory.setDisable(false);
-		this.cmbCategory.valueProperty().addListener(this);
-	}
-
-	private void enableCourierFields() {
-		this.boxCouriers.toFront();
-		this.boxReceptionists.toBack();
-
-		// Reset Receptionist fields
-		this.txtPlace.clear();
-		
-		this.cmbCategory.setVisible(true);
-	}
-
-	private void enableReceptinistFields() {
-		this.boxReceptionists.toFront();
-		this.boxCouriers.toBack();
-		
-		// Reset Courier fields
-		if (this.cmbCategory.getItems().isEmpty()) this.cmbCategory.setValue(null);
-		else {
-			this.cmbCategory.setValue(this.cmbCategory.getItems().get(0));
-		}
-		
-		this.cmbCategory.setVisible(false);
 	}
 
 	@Override
 	public void changed(ObservableValue<? extends Pair<String, String>> observable, Pair<String, String> oldValue, Pair<String, String> newValue) {
-		if (observable.equals(this.cmbCategory.valueProperty())) {
-			if (User.Role.COURIER.name().equals(newValue.getKey())) {
-				// Couriers
-				this.enableCourierFields();
-			} else {
-				// Receptionists or LogisticsManagers
-				this.enableReceptinistFields();
-			}
-		}
+		
 	}
 
 	@FXML

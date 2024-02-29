@@ -77,10 +77,6 @@ INSERT INTO `actions` (`id`, `type`, `performer_username`, `date`, `shipment_id`
 (5, 'DELIVERY', 'raul', '2023-10-05 19:02:00', 1, NULL, NULL, NULL),
 (6, 'ASSIGNMENT', 'laia', '2023-09-26 13:39:14', 2, NULL, 'genis', 9);
 
---
--- Bolcament de dades per a la taula `tracknum`
---
-
 INSERT INTO `tracknum` (`track`) VALUES	(200);
 
 COMMIT;

@@ -135,8 +135,6 @@ CREATE TABLE IF NOT EXISTS `offices` (
   UNIQUE KEY `uk_office_name` (`name`)
 ) ;
 
--- --------------------------------------------------------
-
 --
 -- Esctructura de la taula `tracknum`
 --
@@ -146,7 +144,6 @@ CREATE TABLE IF NOT EXISTS `tracknum` (
 	`track` int NOT NULL DEFAULT '200'
 ) ;
 
--- --------------------------------------------------------
 --
 -- Restriccions per a les taules bolcades
 --
@@ -158,8 +155,9 @@ ALTER TABLE `actions`
   ADD CONSTRAINT `fk_performer_username` FOREIGN KEY (`performer_username`) REFERENCES `users` (`username`),
   ADD CONSTRAINT `fk_courier_username` FOREIGN KEY (`courier_username`) REFERENCES `users` (`username`),
   ADD CONSTRAINT `fk_shipment_id` FOREIGN KEY (`shipment_id`) REFERENCES `shipments` (`id`);
+
   
--- Disparador
+  -- Disparador
 DROP TRIGGER IF EXISTS `before_insert_track_number`;
 DELIMITER //
 CREATE TRIGGER IF NOT EXISTS `before_insert_track_number` BEFORE INSERT ON `actions`
@@ -172,7 +170,7 @@ BEGIN
 END;
 //
 DELIMITER ;
-
+  
 --
 -- Restriccions per a la taula `shipments`
 --

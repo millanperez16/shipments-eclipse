@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
-<BorderPane fx:id="viewProfileForm" prefHeight="540.0" prefWidth="900.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ins.marianao.shipments.fxml.ControllerFormShipment">
+<BorderPane fx:id="viewProfileForm" prefHeight="540.0" prefWidth="900.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ins.marianao.shipments.fxml.ControllerFormUser">
    <center>
 		<AnchorPane styleClass="centerregion">
 			<children>
@@ -36,15 +36,20 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label styleClass="title" text="%fxml.text.formShipment.title" GridPane.columnIndex="1" />
+                  <Label styleClass="title" text="%fxml.text.formUser.title" GridPane.columnIndex="1" />
                   <HBox spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <Label text="%fxml.text.formUser.extension.lbl">
-                           <styleClass>
-                              <String fx:value="label-left" />
-                           </styleClass>
-                        </Label>
-                        <ComboBox fx:id="cmbRole" disable="true" minWidth="200.0" prefWidth="581.0" HBox.hgrow="ALWAYS" />
+                        <ComboBox fx:id="cmbRole" disable="true" minWidth="200.0" HBox.hgrow="ALWAYS" />
+                        <HBox alignment="CENTER_RIGHT" styleClass="input-group" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label text="%fxml.text.formUser.extension.lbl">
+                                 <styleClass>
+                                    <String fx:value="label-left" />
+                                 </styleClass>
+                              </Label>
+                              <TextField fx:id="txtExtension" promptText="%fxml.text.formUser.extension" styleClass="x-large" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
                      </children>
                   </HBox>
                   <HBox styleClass="input-group" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -89,14 +94,38 @@
                   </HBox>
                   <StackPane GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="6">
                      <children>
+                        <HBox fx:id="boxReceptionists" spacing="20.0" styleClass="panel-solid">
+                           <children>
+                              <HBox styleClass="input-group" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label text="%fxml.text.formUser.office.lbl">
+                                       <styleClass>
+                                          <String fx:value="label-left" />
+                                       </styleClass>
+                                    </Label>
+                                    <ComboBox fx:id="cmbOffice" minWidth="180.0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="TOP_RIGHT" styleClass="input-group" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label text="%fxml.text.formUser.place.lbl">
+                                       <styleClass>
+                                          <String fx:value="label-left" />
+                                       </styleClass>
+                                    </Label>
+                                    <TextField fx:id="txtPlace" promptText="lloc" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
                         <HBox fx:id="boxCouriers">
                            <children>
-                              <Label text="%fxml.text.formShipment.category.lbl">
+                              <Label text="%fxml.text.formUser.company.lbl">
                                  <styleClass>
                                     <String fx:value="label-left" />
                                  </styleClass>
                               </Label>
-                              <ComboBox fx:id="cmbCategory" styleClass="combo-fullwidth" HBox.hgrow="ALWAYS" />
+                              <ComboBox fx:id="cmbCompany" styleClass="combo-fullwidth" HBox.hgrow="ALWAYS" />
                            </children>
                            <styleClass>
                               <String fx:value="input-group" />
@@ -105,7 +134,7 @@
                         </HBox>
                      </children>
                   </StackPane>
-      						<Button fx:id="btnSave" mnemonicParsing="false" onAction="#saveShipmentClick" styleClass="button-fullwidth" text="%fxml.text.formShipment.submit" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+      						<Button fx:id="btnSave" mnemonicParsing="false" onAction="#saveProfileClick" styleClass="button-fullwidth" text="%fxml.text.formUser.submit" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                </children>
             </GridPane>
 				<HBox spacing="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">

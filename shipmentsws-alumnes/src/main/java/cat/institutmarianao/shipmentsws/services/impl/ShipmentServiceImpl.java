@@ -2,7 +2,6 @@ package cat.institutmarianao.shipmentsws.services.impl;
  
 import java.util.Date;
 import java.util.List;
-import jakarta.persistence.criteria.Predicate;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
@@ -23,6 +22,8 @@ import cat.institutmarianao.shipmentsws.validation.groups.OnShipmentCreate;
 import cat.institutmarianao.shipmentsws.specifications.ShipmentWithCategory;
 import cat.institutmarianao.shipmentsws.specifications.ShipmentWithReceiver;
 import cat.institutmarianao.shipmentsws.specifications.ShipmentWithCourier;
+import cat.institutmarianao.shipmentsws.specifications.ShipmentWithDateFrom;
+import cat.institutmarianao.shipmentsws.specifications.ShipmentWithDateTo;
 
 @Validated
 @Service
@@ -30,23 +31,13 @@ public class ShipmentServiceImpl implements ShipmentService {
 
 	@Autowired
 	private ShipmentRepository shipmentRepository;
-	
-	private int numberTracking = 200;
 
 	@Override
 	public List<Shipment> findAll(Status status, String receivedBy, String courierAssigned, Category category,
 			Date from, Date to) {
 		Specification<Shipment> spec = Specification.where(new ShipmentWithStatus(status))
 				.and(new ShipmentWithCategory(category).and(new ShipmentWithReceiver(receivedBy))
-						.and(new ShipmentWithCourier(courierAssigned)).and((root, query, criteriaBuilder) -> {
-		                    Predicate predicate = criteriaBuilder.isTrue(criteriaBuilder.literal(true));
-
-		                    if (from != null && to != null) {
-		                        predicate = criteriaBuilder.and(predicate, criteriaBuilder.between(root.get("shipmentDate"), from, to));
-		                    }
-
-		                    return predicate;
-		                }));
+						.and(new ShipmentWithCourier(courierAssigned)).and(new ShipmentWithDateFrom(from)).and(new ShipmentWithDateTo(to)));
 		return shipmentRepository.findAll(spec);
 	}
 	
@@ -54,15 +45,7 @@ public class ShipmentServiceImpl implements ShipmentService {
 		Status pendingStatus = Status.PENDING;
 		Specification<Shipment> spec = Specification.where(new ShipmentWithStatus(pendingStatus))
 				.and(new ShipmentWithCategory(category).and(new ShipmentWithReceiver(receivedBy))
-						.and(new ShipmentWithCourier(courierAssigned)).and((root, query, criteriaBuilder) -> {
-		                    Predicate predicate = criteriaBuilder.isTrue(criteriaBuilder.literal(true));
-
-		                    if (from != null && to != null) {
-		                        predicate = criteriaBuilder.and(predicate, criteriaBuilder.between(root.get("shipmentDate"), from, to));
-		                    }
-
-		                    return predicate;
-		                }));
+						.and(new ShipmentWithCourier(courierAssigned)).and(new ShipmentWithDateFrom(from)).and(new ShipmentWithDateTo(to)));
 		return shipmentRepository.findAll(spec);
 	}
 
@@ -72,15 +55,7 @@ public class ShipmentServiceImpl implements ShipmentService {
 		Status inProcessStatus = Status.IN_PROCESS;
 		Specification<Shipment> spec = Specification.where(new ShipmentWithStatus(inProcessStatus))
 				.and(new ShipmentWithCategory(category).and(new ShipmentWithReceiver(receivedBy))
-						.and(new ShipmentWithCourier(courierAssigned)).and((root, query, criteriaBuilder) -> {
-		                    Predicate predicate = criteriaBuilder.isTrue(criteriaBuilder.literal(true));
-
-		                    if (from != null && to != null) {
-		                        predicate = criteriaBuilder.and(predicate, criteriaBuilder.between(root.get("shipmentDate"), from, to));
-		                    }
-
-		                    return predicate;
-		                }));
+						.and(new ShipmentWithCourier(courierAssigned)).and(new ShipmentWithDateFrom(from)).and(new ShipmentWithDateTo(to)));
 		return shipmentRepository.findAll(spec);
 	}
 
@@ -97,8 +72,6 @@ public class ShipmentServiceImpl implements ShipmentService {
 		}
 		if (shipment.getTracking().get(0) instanceof Reception) {
 			shipment.getTracking().get(0).setShipment(shipment);
-			Reception r = (Reception) shipment.getTracking().get(0);
-			r.setTrackingNumber(numberTracking++);
 		} else {
 			return null; // lanzar excepción
 		}
